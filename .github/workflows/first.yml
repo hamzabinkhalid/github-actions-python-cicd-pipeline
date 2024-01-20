@@ -1,0 +1,24 @@
+name: first
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v1
+    - name: run script
+      run: python hello.py
+  build:
+    needs: test
+    runs-on: macos-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v1
+    - name: upload artifacts
+      uses: actions/upload-artifacts@v1
+      with:
+        name: myartifact
+        path: .
+  
